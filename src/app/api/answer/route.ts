@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   const { question } = await request.json();
 
   const res = await together.chat.completions.create({
-    model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+    model: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
     messages: [
       {
         role: "system",
@@ -17,8 +17,6 @@ export async function POST(request: Request) {
     logprobs: 1,
     max_tokens: 1,
   });
-
-  // console.log(JSON.stringify(res.choices[0], null, 2));
 
   const logprobs = Math.exp(res.choices[0].logprobs?.token_logprobs?.[0] ?? 0);
   const result = res.choices[0].message?.content;

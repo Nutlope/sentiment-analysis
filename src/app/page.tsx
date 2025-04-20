@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-// import { ChatCompletionStream } from "together-ai/lib/ChatCompletionStream";
 
 const sampleReviews = [
   {
@@ -47,10 +46,6 @@ export default function Chat() {
     setAnswer(result);
     setLogprobs(logprobs);
     setStatus("done");
-
-    // ChatCompletionStream.fromReadableStream(res.body)
-    //   .on("content", (delta) => setAnswer((text) => text + delta))
-    //   .on("end", () => setStatus("done"));
   }
 
   return (
