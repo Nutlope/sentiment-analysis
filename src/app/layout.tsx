@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Link from "next/link";
 import NavLink from "@/app/NavLink";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
@@ -17,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Together AI - Next Chat",
-  description: "Quickstart for Together AI + Next.js",
+  title: "Sentiment Analysis",
+  description: "Sentiment Analysis app",
 };
 
 export default function RootLayout({

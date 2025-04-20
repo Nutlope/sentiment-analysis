@@ -1,11 +1,12 @@
-# Together AI + Next.js
+# Sentiment Analysis App
 
-This demo app showcases how to use [Together AI's TypeScript SDK](https://github.com/togethercomputer/together-typescript) with Next.js.
+This Next.js application provides sentiment analysis capabilities, allowing users to analyze the emotional tone of text input. Powered by Together AI.
 
-There are two routes:
+## Features
 
-- Ask a question: [src/app/page.tsx](./src/app/page.tsx)
-- Chat: [src/app/chat/page.tsx](./src/app/chat/page.tsx)
+- Real-time sentiment analysis of text
+- Modern, responsive user interface
+- Built with Next.js and TypeScript
 
 ## Running locally
 
@@ -25,4 +26,10 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, create a `.env.local` file and add your Together AI API key:
+
+```bash
+TOGETHER_API_KEY=your_api_key_here
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the sentiment analysis application.
