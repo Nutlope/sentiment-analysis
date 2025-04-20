@@ -37,13 +37,13 @@ export default function RootLayout({
               className="text-gray-400 data-[active]:text-gray-900"
               href="/"
             >
-              Ask a question
+              Add a review
             </NavLink>
             <NavLink
               className="text-gray-400 data-[active]:text-gray-900"
-              href="/chat"
+              href="/upload"
             >
-              Chat
+              Upload a file
             </NavLink>
 
             <div className="ml-auto">

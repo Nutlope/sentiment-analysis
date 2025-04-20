@@ -1,12 +1,13 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { ChatCompletionStream } from "together-ai/lib/ChatCompletionStream";
+// import { ChatCompletionStream } from "together-ai/lib/ChatCompletionStream";
 
 export default function Chat() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<"idle" | "pending" | "done">("idle");
+  const [logprobs, setLogprobs] = useState<number | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,9 +21,15 @@ export default function Chat() {
 
     if (!res.body) return;
 
-    ChatCompletionStream.fromReadableStream(res.body)
-      .on("content", (delta) => setAnswer((text) => text + delta))
-      .on("end", () => setStatus("done"));
+    const { result, logprobs } = await res.json();
+
+    setAnswer(result);
+    setLogprobs(logprobs);
+    setStatus("done");
+
+    // ChatCompletionStream.fromReadableStream(res.body)
+    //   .on("content", (delta) => setAnswer((text) => text + delta))
+    //   .on("end", () => setStatus("done"));
   }
 
   return (
@@ -30,8 +37,8 @@ export default function Chat() {
       {status === "idle" ? (
         <div className="flex grow flex-col justify-center">
           <form onSubmit={handleSubmit} className="flex w-full gap-2">
-            <input
-              placeholder="Ask me a question"
+            <textarea
+              placeholder="Add a review to see the sentiment"
               autoFocus
               name="prompt"
               required
@@ -63,14 +70,20 @@ export default function Chat() {
                     setStatus("idle");
                   }}
                 >
-                  Reset
+                  Try another review
                 </button>
               </div>
             </div>
           </div>
 
           <div className="py-8">
-            <p className="whitespace-pre-wrap">{answer}</p>
+            <p className="whitespace-pre-wrap">
+              <b>{answer}</b> (
+              {answer &&
+                logprobs &&
+                `${(logprobs * 100).toFixed(0)}% probability`}
+              )
+            </p>
           </div>
         </>
       )}
