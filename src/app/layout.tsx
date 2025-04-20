@@ -43,7 +43,7 @@ export default function RootLayout({
               className="text-gray-400 data-[active]:text-gray-900"
               href="/upload"
             >
-              Upload a file
+              Upload (coming soon)
             </NavLink>
 
             <div className="ml-auto">
@@ -59,7 +59,7 @@ export default function RootLayout({
 
         <main className="flex grow flex-col">{children}</main>
 
-        <footer className="bg-gray-50 text-sm text-gray-500">
+        {/* <footer className="bg-gray-50 text-sm text-gray-500">
           <div className="mx-auto max-w-6xl px-4 py-6">
             Powered by{" "}
             <Link
@@ -78,7 +78,7 @@ export default function RootLayout({
             </Link>
             .
           </div>
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

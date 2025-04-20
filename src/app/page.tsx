@@ -3,11 +3,32 @@
 import { FormEvent, useState } from "react";
 // import { ChatCompletionStream } from "together-ai/lib/ChatCompletionStream";
 
+const sampleReviews = [
+  {
+    text: "I absolutely love this product! It works just as described and has made my life so much easier. Highly recommend it to everyone looking for a reliable solution.",
+    type: "Positive",
+  },
+  {
+    text: "The product broke after just a week of use. I'm very disappointed with the quality and wouldn't recommend it to anyone. The customer service was unhelpful too.",
+    type: "Negative",
+  },
+  {
+    text: "The product is decent, but I expected it to be a bit better for the price. It does the job, but there are a lot of similar products out there that are more affordable.",
+    type: "Neutral",
+  },
+];
+
 export default function Chat() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<"idle" | "pending" | "done">("idle");
   const [logprobs, setLogprobs] = useState<number | null>(null);
+
+  const useRandomReview = () => {
+    const randomReview =
+      sampleReviews[Math.floor(Math.random() * sampleReviews.length)];
+    setQuestion(randomReview.text);
+  };
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,8 +57,16 @@ export default function Chat() {
     <div className="mx-auto flex w-full max-w-3xl grow flex-col px-4">
       {status === "idle" ? (
         <div className="flex grow flex-col justify-center">
-          <form onSubmit={handleSubmit} className="flex w-full gap-2">
+          <div className="mb-6 text-center">
+            <h1 className="mb-2 text-2xl font-bold">Sentiment Analysis</h1>
+            <p className="text-gray-600">
+              Enter a product review below to analyze its sentiment, or use a
+              random example to try it out.
+            </p>
+          </div>
+          <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
             <textarea
+              rows={5}
               placeholder="Add a review to see the sentiment"
               autoFocus
               name="prompt"
@@ -46,12 +75,21 @@ export default function Chat() {
               onChange={(e) => setQuestion(e.target.value)}
               className="block w-full rounded border border-gray-300 p-2 outline-black"
             />
-            <button
-              className="rounded bg-black px-3 py-1 font-medium text-white outline-offset-[3px] outline-black"
-              type="submit"
-            >
-              Submit
-            </button>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={useRandomReview}
+                className="w-fit rounded bg-gray-200 px-3 py-1 text-sm text-black outline-offset-[3px] outline-black hover:bg-gray-300"
+              >
+                Use Random Review
+              </button>
+              <button
+                className="w-fit rounded bg-black px-4 py-1 text-sm font-medium text-white transition-colors hover:bg-gray-800 disabled:opacity-50"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       ) : (
@@ -78,11 +116,10 @@ export default function Chat() {
 
           <div className="py-8">
             <p className="whitespace-pre-wrap">
-              <b>{answer}</b> (
+              <b>{answer}</b>{" "}
               {answer &&
                 logprobs &&
-                `${(logprobs * 100).toFixed(0)}% probability`}
-              )
+                `(${(logprobs * 100).toFixed(0)}% probability)`}
             </p>
           </div>
         </>
