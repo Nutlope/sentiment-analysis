@@ -70,19 +70,19 @@ export default function Chat() {
               onChange={(e) => setQuestion(e.target.value)}
               className="block w-full rounded border border-gray-300 p-2 outline-black"
             />
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={useRandomReview}
-                className="w-fit rounded bg-gray-200 px-3 py-1 text-sm text-black outline-offset-[3px] outline-black hover:bg-gray-300"
-              >
-                Use Random Review
-              </button>
+            <div className="flex justify-between gap-2">
               <button
                 className="w-fit rounded bg-black px-4 py-1 text-sm font-medium text-white transition-colors hover:bg-gray-800 disabled:opacity-50"
                 type="submit"
               >
                 Submit
+              </button>
+              <button
+                type="button"
+                onClick={useRandomReview}
+                className="text-sm font-medium text-gray-700 transition hover:underline"
+              >
+                Use Random Review
               </button>
             </div>
           </form>

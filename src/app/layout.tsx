@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavLink from "@/app/NavLink";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -47,7 +48,7 @@ export default function RootLayout({
 
             <div className="ml-auto">
               <a
-                href="https://github.com/samselikoff/together-nextjs-chat"
+                href="https://github.com/Nutlope/sentiment-analysis"
                 className="text-gray-500 hover:text-gray-900"
               >
                 <GitHubLogoIcon width="20" height="20" />
@@ -58,7 +59,7 @@ export default function RootLayout({
 
         <main className="flex grow flex-col">{children}</main>
 
-        {/* <footer className="bg-gray-50 text-sm text-gray-500">
+        <footer className="bg-gray-50 text-sm text-gray-500">
           <div className="mx-auto max-w-6xl px-4 py-6">
             Powered by{" "}
             <Link
@@ -70,14 +71,14 @@ export default function RootLayout({
             </Link>
             . View the source on{" "}
             <Link
-              href="https://github.com/samselikoff/together-nextjs-chat"
+              href="https://github.com/Nutlope/sentiment-analysis"
               className="font-medium underline underline-offset-2"
             >
               GitHub
             </Link>
             .
           </div>
-        </footer> */}
+        </footer>
       </body>
     </html>
   );
