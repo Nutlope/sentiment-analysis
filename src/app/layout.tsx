@@ -39,12 +39,12 @@ export default function RootLayout({
             >
               Add a review
             </NavLink>
-            <NavLink
+            {/* <NavLink
               className="text-gray-400 data-[active]:text-gray-900"
               href="/upload"
             >
               Upload (coming soon)
-            </NavLink>
+            </NavLink> */}
 
             <div className="ml-auto">
               <a
